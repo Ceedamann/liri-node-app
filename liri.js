@@ -10,11 +10,24 @@ var fs = require('fs');
 var command = process.argv[2];
 var value = process.argv[3];
 
+var songTitle = "";
+for (let i = 2; i < value.length; i++) {
+    if(i > 2 && i < value.length){
+        songTitle = songTitle + "+" + value[i];
+    }else {
+        songTitle += value[i];
+    }
+    
+}
+
 function spotifyThis(input) {
     spotify
-        .search({ type: 'track', query: value, limit : 5 })
-        .then(function (response) {
-            console.log(JSON.stringify(response.tracks.items[0].artists[0].name, null, 2));
+        .search({ type: 'track', query: value, limit : 5})
+        .then(function (resp) {
+            console.log("Artist Name: " + JSON.stringify(resp.tracks.items[0].artists[0].name, null, 2));
+            console.log("Song Title: " + JSON.stringify(resp.tracks.items[0].name, null, 2));
+            console.log("Preview link: " + JSON.stringify(resp.tracks.items[0].preview_url, null, 2));
+            console.log("Album Title: " + JSON.stringify(resp.tracks.items[0].album.name, null, 2));
         })
         .catch(function (err) {
             console.log(err);
