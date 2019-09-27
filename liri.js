@@ -7,7 +7,7 @@ var moment = require('moment');
 var fs = require('fs');
 const chalk = require('chalk');
 var chalkRed = chalk.yellow.bold.bgBlack.underline
-var chalkBlack = chalk.redBright.bold.bgBlack.underline
+var chalkBlack = chalk.redBright.bold.bgBlack
 
 var command = process.argv[2];
 var value = process.argv.slice(3).join(" ");
@@ -20,10 +20,14 @@ function spotifyThis(input) {
             limit: 5
         })
         .then(function (resp) {
-            console.log("Artist Name: " + JSON.stringify(resp.tracks.items[0].artists[0].name, null, 2));
-            console.log("Song Title: " + JSON.stringify(resp.tracks.items[0].name, null, 2));
-            console.log("Preview link: " + JSON.stringify(resp.tracks.items[0].preview_url, null, 2));
-            console.log("Album Title: " + JSON.stringify(resp.tracks.items[0].album.name, null, 2));
+            console.log("___________________________");
+            console.log("");
+            
+            console.log("Artist Name: " + chalkBlack(resp.tracks.items[0].artists[0].name));
+            console.log("Song Title: " + chalkRed(resp.tracks.items[0].name));
+            console.log("Preview link: " + chalkBlack(resp.tracks.items[0].preview_url));
+            console.log("Album Title: " + chalkRed(resp.tracks.items[0].album.name));
+            console.log("___________________________");
 
 
         })
@@ -40,11 +44,13 @@ function concertThis() {
         function (resp) {
             var data = resp.data
             for (let i = 0; i < data.length; i++) {
-                console.log(chalkRed('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'));              
+                console.log(chalkRed('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'));              console.log("");
+                
                 console.log("Band/Artist: " + chalkRed(data[i].lineup));
                 console.log("Venue: " + chalkBlack(data[i].venue.name));
                 console.log("Location: " + chalkRed(data[i].venue.city + ", " + data[i].venue.region));
                 console.log("Date of Event: " + chalkBlack(data[i].datetime));
+                console.log("");
                 }console.log(chalkRed("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"))
         }       
         
