@@ -70,7 +70,16 @@ function concertThis() {
     )
 }
 
-function movieThis() {
+function movieThis(){
+    if(value === ""){
+        value = "Mr Nobody";
+        movieThisValue();
+    }else{
+        movieThisValue();
+    }
+}
+
+function movieThisValue() {
     var queryUrl = "http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy";
 
     axios.get(queryUrl).then(
