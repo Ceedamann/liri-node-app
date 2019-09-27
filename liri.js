@@ -84,3 +84,12 @@ switch (command) {
         doWhatItSays();
         break;
 }
+fs.appendFile("log.txt", value + ', ', function(err){
+    if(err){
+        console.log(err);
+        
+    }else{
+        console.log("Info added");
+        
+    }
+})
