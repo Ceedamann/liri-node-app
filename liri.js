@@ -33,7 +33,7 @@ function spotifyThis(input) {
 
 function concertThis() {
     var queryUrl = "https://rest.bandsintown.com/artists/" + value + "/events?app_id=codingbootcamp";
-    var m = moment().format("MM/DD/YYYY")
+    var m = moment().format("L")
     axios.get(queryUrl).then(
         function (resp) {
             var data = resp.data
@@ -53,15 +53,13 @@ function movieThis() {
     var queryUrl = "http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy";
 
     axios.get(queryUrl).then(
-        function (resp) {
-
-            // Then we print out the imdbRating
+        function (resp) {           
             console.log("The movie's Title: " + resp.data.Title);
             console.log("The movie's was released in: " + resp.data.Year);
             console.log("The movie's rating is: " + resp.data.imdbRating);
             console.log("The movie's Rotten Tomatoes rating is: " + resp.data.Ratings[1].Value);
             console.log("The movie's was produced in: " + resp.data.Country);
-            console.log("The movie's language: " + resp.data.Language);
+            console.log("The movie's language(s): " + resp.data.Language);
             console.log("The movie's Plot: " + resp.data.Plot);
             console.log("The movie's Actors: " + resp.data.Actors);
 
