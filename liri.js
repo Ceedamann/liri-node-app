@@ -11,7 +11,19 @@ var chalkBlack = chalk.redBright.bold.bgBlack
 var command = process.argv[2];
 var value = process.argv.slice(3).join(" ");
 
-function spotifyThis(input) {
+
+function spotifyThis(){
+    if(value === ""){
+        value = "The Sign Ace of Base";
+        spotifyThisValue();
+    }else{
+        spotifyThisValue();
+    }
+}
+
+
+
+function spotifyThisValue(input) {
     spotify
         .search({
             type: 'track',
