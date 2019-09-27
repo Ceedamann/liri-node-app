@@ -5,7 +5,9 @@ var spotify = new Spotify(keys.spotify);
 var axios = require('axios');
 var moment = require('moment');
 var fs = require('fs');
-
+const chalk = require('chalk');
+var chalkRed = chalk.yellow.bold.bgBlack.underline
+var chalkBlack = chalk.redBright.bold.bgBlack.underline
 
 var command = process.argv[2];
 var value = process.argv.slice(3).join(" ");
@@ -38,12 +40,12 @@ function concertThis() {
         function (resp) {
             var data = resp.data
             for (let i = 0; i < data.length; i++) {
-                console.log('#############################');              
-                console.log("Band/Artist: " + data[i].lineup);
-                console.log("Venue: " + data[i].venue.name);
-                console.log("Location: " + data[i].venue.city + ", " + data[i].venue.region);
-                console.log("Date of Event: " + data[i].datetime);
-                }console.log("##############################")
+                console.log(chalkRed('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'));              
+                console.log("Band/Artist: " + chalkRed(data[i].lineup));
+                console.log("Venue: " + chalkBlack(data[i].venue.name));
+                console.log("Location: " + chalkRed(data[i].venue.city + ", " + data[i].venue.region));
+                console.log("Date of Event: " + chalkBlack(data[i].datetime));
+                }console.log(chalkRed("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"))
         }       
         
     )
