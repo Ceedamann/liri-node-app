@@ -55,16 +55,18 @@ function movieThis() {
     var queryUrl = "http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy";
 
     axios.get(queryUrl).then(
-        function (resp) {           
-            console.log("The movie's Title: " + resp.data.Title);
-            console.log("The movie's was released in: " + resp.data.Year);
-            console.log("The movie's rating is: " + resp.data.imdbRating);
-            console.log("The movie's Rotten Tomatoes rating is: " + resp.data.Ratings[1].Value);
-            console.log("The movie's was produced in: " + resp.data.Country);
-            console.log("The movie's language(s): " + resp.data.Language);
-            console.log("The movie's Plot: " + resp.data.Plot);
-            console.log("The movie's Actors: " + resp.data.Actors);
-
+        function (resp) {   
+            console.log("---------------------------------");
+                    
+            console.log("The movie's Title: " + chalkRed(resp.data.Title));
+            console.log("The movie's was released in: " + chalkBlack(resp.data.Year));
+            console.log("The movie's rating is: " + chalkRed(resp.data.imdbRating));
+            console.log("The movie's Rotten Tomatoes rating is: " + chalkBlack(resp.data.Ratings[1].Value));
+            console.log("The movie's was produced in: " + chalkRed(resp.data.Country));
+            console.log("The movie's language(s): " + chalkBlack(resp.data.Language));
+            console.log("The movie's Plot: " + chalkRed(resp.data.Plot));
+            console.log("The movie's Actors: " + chalkBlack(resp.data.Actors));
+            console.log("---------------------------------");
         }
     );
 }
