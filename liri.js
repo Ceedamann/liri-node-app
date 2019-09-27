@@ -7,6 +7,7 @@ var moment = require('moment');
 var fs = require('fs');
 const chalk = require('chalk');
 var chalkRed = chalk.yellow.bold.bgBlack.underline
+var chalkGreen = chalk.yellow.bold.bgBlack
 var chalkBlack = chalk.redBright.bold.bgBlack
 var command = process.argv[2];
 var value = process.argv.slice(3).join(" ");
@@ -36,9 +37,9 @@ function spotifyThisValue(input) {
                 console.log("___________________________");
                 console.log("");
                 console.log("Artist Name: " + chalkBlack(data[x].artists[0].name));
-                console.log("Song Title: " + chalkRed(data[x].name));
+                console.log("Song Title: " + chalkGreen(data[x].name));
                 console.log("Preview link: " + chalkBlack(data[x].preview_url));
-                console.log("Album Title: " + chalkRed(data[x].album.name));
+                console.log("Album Title: " + chalkGreen(data[x].album.name));
                
                 
             }
@@ -85,13 +86,13 @@ function movieThisValue() {
     axios.get(queryUrl).then(
         function (resp) {
             console.log("---------------------------------");
-            console.log("The movie's Title: " + chalkRed(resp.data.Title));
+            console.log("The movie's Title: " + chalkGreen(resp.data.Title));
             console.log("The movie's was released in: " + chalkBlack(resp.data.Year));
-            console.log("The movie's rating is: " + chalkRed(resp.data.imdbRating));
+            console.log("The movie's rating is: " + chalkGreen(resp.data.imdbRating));
             console.log("The movie's Rotten Tomatoes rating is: " + chalkBlack(resp.data.Ratings[1].Value));
-            console.log("The movie's was produced in: " + chalkRed(resp.data.Country));
+            console.log("The movie's was produced in: " + chalkGreen(resp.data.Country));
             console.log("The movie's language(s): " + chalkBlack(resp.data.Language));
-            console.log("The movie's Plot: " + chalkRed(resp.data.Plot));
+            console.log("The movie's Plot: " + chalkGreen(resp.data.Plot));
             console.log("The movie's Actors: " + chalkBlack(resp.data.Actors));
             console.log("---------------------------------");
         }
@@ -105,18 +106,10 @@ function doWhatItSays() {
         if (error) {
           return console.log(error);
         }
-      
-        // We will then print the contents of data
-        console.log(data);
-      
         // Then split it by commas (to make it more readable)
-        var dataArr = data.split(", ");
-      
+        var dataArr = data.split(", ");      
         command = dataArr[0];
-        value = dataArr[1];
-
-        // We will then re-display the content as an array for later use.
-        console.log(dataArr);
+        value = dataArr[1];      
         whatItSays();
       })
       
