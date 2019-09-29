@@ -1,3 +1,4 @@
+// Declared golbal variables//
 require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
@@ -12,50 +13,61 @@ var chalkBlack = chalk.redBright.bold.bgBlack
 var command = process.argv[2];
 var value = process.argv.slice(3).join(" ");
 
-
+// spotify function that returns default value if left blank//
 function spotifyThis(){
+    // if vaule equals empty string ""//
     if(value === ""){
+        // assign value to 'the sign' //
         value = "The Sign Ace of Base";
         spotifyThisValue();
+        // else run function w/ user inputed vaule//
     }else{
         spotifyThisValue();
     }
 }
 
 
-
+// spotify function that take value from userInput //
 function spotifyThisValue(input) {
+    // ajax call req to spotify//
     spotify
         .search({
             type: 'track',
             query: value,
             limit: 5
         })
+
+        // response function for looped response results//
         .then(function (resp) {
             var data = resp.tracks.items
             for (let x = 0; x < data.length; x++) {
+                console.log(resp.tracks);
+                
+                // logged results to console//
                 console.log("___________________________");
                 console.log("");
                 console.log("Artist Name: " + chalkBlack(data[x].artists[0].name));
                 console.log("Song Title: " + chalkGreen(data[x].name));
                 console.log("Preview link: " + chalkBlack(data[x].preview_url));
                 console.log("Album Title: " + chalkGreen(data[x].album.name));
-               
-                
             }
-            console.log("___________________________");
+                console.log("___________________________");
         })
         .catch(function (err) {
             console.log(err);
         });
 
 }
-
+// concert results function//
 function concertThis() {
+
+    // ajax req to bandsintown.com //
     var queryUrl = "https://rest.bandsintown.com/artists/" + value + "/events?app_id=codingbootcamp";
         axios.get(queryUrl).then(
+
+            // looped thru response and logged results//
         function (resp) {
-            var data = resp.data
+            var data = resp.data;                    
             for (let i = 0; i < data.length; i++) {
                 console.log(chalkRed('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'));
                 console.log("");
@@ -70,7 +82,7 @@ function concertThis() {
 
     )
 }
-
+// OMDB function that returns default value if left blank//
 function movieThis(){
     if(value === ""){
         value = "Mr Nobody";
@@ -79,10 +91,10 @@ function movieThis(){
         movieThisValue();
     }
 }
-
+// OMDB function that take value from userInput //
 function movieThisValue() {
     var queryUrl = "http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy";
-
+// ajax call req to OMDB then console log the results//
     axios.get(queryUrl).then(
         function (resp) {
             console.log("---------------------------------");
@@ -98,7 +110,7 @@ function movieThisValue() {
         }
     );
 }
-
+// fucntion the pulls the command and value from a txt file //
 function doWhatItSays() {
     fs.readFile("random.txt", "utf8", function(error, data) {
 
@@ -114,6 +126,7 @@ function doWhatItSays() {
       })
       
 }
+// function that handles the commands of app functions//
 function whatItSays(){
     switch (command) {
         case "spotify-this-song":
@@ -130,7 +143,7 @@ function whatItSays(){
             break;
     }
 }whatItSays();
-
+// function that appends user inputed value in to log.txt file //
 fs.appendFile("log.txt", value + ', ', function (err) {
     if (err) {
         console.log(err);
