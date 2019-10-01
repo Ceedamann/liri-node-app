@@ -4,7 +4,7 @@ LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and R
 
 LIRI will search Spotify for songs, Bands in Town for concerts, and OMDB for movies. 
 
-### What Each Command Should Do
+### What Each Command Will Do
 
 1. `node liri.js concert-this <artist/band name here>`
 
