@@ -40,9 +40,7 @@ function spotifyThisValue(input) {
         // response function for looped response results//
         .then(function (resp) {
             var data = resp.tracks.items
-            for (let x = 0; x < data.length; x++) {
-                console.log(resp.tracks);
-                
+            for (let x = 0; x < data.length; x++) {                              
                 // logged results to console//
                 console.log("___________________________");
                 console.log("");
